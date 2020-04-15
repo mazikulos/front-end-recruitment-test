@@ -1,0 +1,25 @@
+$lightGray: #f2f2f2;
+$gray: #ccc;
+$darkGray: #515360;
+$green: #6bd400;
+$greenHover: #63c204;
+$greenShadow: #5db603;
+$greenShadowHover: #3b7502;
+$danger: rgb(193, 32, 32);
+$borderRadius: 3px;
+
+@mixin shadowRadius($bgColor: white, $shadowColor: $gray, $color: white, $height: 50px) {
+  box-shadow: 0 2px 0 0 $shadowColor;
+  background-color: $bgColor;
+  color: $color;
+  border: 0;
+  border-radius: $borderRadius;
+  height: $height;
+  transition: 0.3s;
+}
+
+@mixin shadowRadiusOver($bgColor: white, $shadowColor: $darkGray, $color: white) {
+  box-shadow: 0 2px 0 0 $shadowColor;
+  background-color: $bgColor;
+  color: $color;
+}

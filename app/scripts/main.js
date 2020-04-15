@@ -77,14 +77,50 @@
 
   // Your custom JavaScript goes here
 
-  function cloneBacon() {
-    const baconImg = document.querySelector('#overview img');
-    const baconContainer = baconImg.parentElement;
-    baconContainer.appendChild(baconImg.cloneNode(true));
+  // function cloneBacon() {
+  //   const baconImg = document.querySelector('#overview img');
+  //   const baconContainer = baconImg.parentElement;
+  //   baconContainer.appendChild(baconImg.cloneNode(true));
+  // }
+
+  // const baconBtn = document.querySelector('#overview button');
+  // baconBtn.addEventListener('click', () => {
+  //   cloneBacon();
+  // })
+
+  // Task 2
+  if (typeof Vue !== 'undefined') {
+    new Vue({
+      el: '#checkout',
+      data() {
+        return {
+          form: {
+            firstName: '',
+            lastName: '',
+            email: '',
+            country: 'United States',
+            postalCode: '',
+            phone: '',
+            cardNumber: '',
+            security: '',
+            expirationDate: ''
+          },
+          countries: [
+            'United States',
+            'Poland',
+            'Italy'
+          ]
+        }
+      },
+      filters: {
+        currency(value) {
+          return '$ ' + value;
+        },
+        price(value) {
+          return '$ ' + value.toFixed(2);
+        },
+      },
+    });
   }
-  
-  const baconBtn = document.querySelector('#overview button');
-  baconBtn.addEventListener('click', () => {
-    cloneBacon();
-  })
+
 })();
