@@ -17,7 +17,7 @@
  *
  */
 /* eslint-env browser */
-(function() {
+(function () {
   'use strict';
 
   // Check to make sure service workers are supported in the current browser,
@@ -39,9 +39,9 @@
     && (window.location.protocol === 'https:' || isLocalhost)
   ) {
     navigator.serviceWorker.register('service-worker.js')
-      .then(function(registration) {
+      .then(function (registration) {
         // updatefound is fired if service-worker.js changes.
-        registration.onupdatefound = function() {
+        registration.onupdatefound = function () {
           // updatefound is also fired the very first time the SW is installed,
           // and there's no need to prompt for a reload at that point.
           // So check here to see if the page is already controlled,
@@ -51,29 +51,40 @@
             // https://slightlyoff.github.io/ServiceWorker/spec/service_worker/index.html#service-worker-container-updatefound-event
             const installingWorker = registration.installing;
 
-            installingWorker.onstatechange = function() {
+            installingWorker.onstatechange = function () {
               switch (installingWorker.state) {
-              case 'installed':
-                // At this point, the old content will have been purged and the
-                // fresh content will have been added to the cache.
-                // It's the perfect time to display a "New content is
-                // available; please refresh." message in the page's interface.
-                break;
+                case 'installed':
+                  // At this point, the old content will have been purged and the
+                  // fresh content will have been added to the cache.
+                  // It's the perfect time to display a "New content is
+                  // available; please refresh." message in the page's interface.
+                  break;
 
-              case 'redundant':
-                throw new Error('The installing ' +
+                case 'redundant':
+                  throw new Error('The installing ' +
                     'service worker became redundant.');
 
-              default:
-                  // Ignore
+                default:
+                // Ignore
               }
             };
           }
         };
-      }).catch(function(e) {
+      }).catch(function (e) {
         console.error('Error during service worker registration:', e);
       });
   }
 
   // Your custom JavaScript goes here
+
+  function cloneBacon() {
+    const baconImg = document.querySelector('#overview img');
+    const baconContainer = baconImg.parentElement;
+    baconContainer.appendChild(baconImg.cloneNode(true));
+  }
+  
+  const baconBtn = document.querySelector('#overview button');
+  baconBtn.addEventListener('click', () => {
+    cloneBacon();
+  })
 })();
