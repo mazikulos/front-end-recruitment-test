@@ -77,16 +77,16 @@
 
   // Your custom JavaScript goes here
 
-  // function cloneBacon() {
-  //   const baconImg = document.querySelector('#overview img');
-  //   const baconContainer = baconImg.parentElement;
-  //   baconContainer.appendChild(baconImg.cloneNode(true));
-  // }
+  function cloneBacon() {
+    const baconImg = document.querySelector('#overview img');
+    const baconContainer = baconImg.parentElement;
+    baconContainer.appendChild(baconImg.cloneNode(true));
+  }
 
-  // const baconBtn = document.querySelector('#overview button');
-  // baconBtn.addEventListener('click', () => {
-  //   cloneBacon();
-  // })
+  const baconBtn = document.querySelector('#overview button');
+  baconBtn.addEventListener('click', () => {
+    cloneBacon();
+  })
 
   // Task 2
   if (typeof Vue !== 'undefined') {
