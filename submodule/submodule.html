@@ -93,24 +93,24 @@
               PERSONAL INFORMATION
             </h2>
           </div>
-          <div class="col-8">
+          <div class="col-md-8 col-12">
             <div class="row">
               <div class="col-6">
                 <div class="section-checkout__form-group">
                   <label class="section-checkout__label">First name</label>
-                  <input type="text" class="section-checkout__input" placeholder="Elon" v-model="form.firstName">
+                  <input type="text" id="firstName" class="section-checkout__input" placeholder="Elon" v-model="form.firstName">
                 </div>
               </div>
               <div class="col-6">
                 <div class="section-checkout__form-group">
                   <label class="section-checkout__label">Last name</label>
-                  <input type="text" class="section-checkout__input" placeholder="Musk" v-model="form.lastName">
+                  <input type="text" id="lastName" class="section-checkout__input" placeholder="Musk" v-model="form.lastName">
                 </div>
               </div>
               <div class="col-12">
                 <div class="section-checkout__form-group">
                   <label class="section-checkout__label">Email</label>
-                  <input type="email" class="section-checkout__input" placeholder="elon@spacex.com"
+                  <input type="email" id="email" class="section-checkout__input" placeholder="elon@spacex.com"
                     v-model="form.email">
                 </div>
               </div>
@@ -127,13 +127,13 @@
               <div class="col-6">
                 <div class="section-checkout__form-group">
                   <label class="section-checkout__label">Postal Code</label>
-                  <input type="text" class="section-checkout__input" placeholder="10001" v-model="form.postalCode">
+                  <input type="text" id="postalCode" class="section-checkout__input" placeholder="10001" v-model="form.postalCode">
                 </div>
               </div>
               <div class="col-12">
                 <div class="section-checkout__form-group">
                   <label class="section-checkout__label">Phone</label>
-                  <input type="text" class="section-checkout__input" placeholder="(212) 692-93-92" v-model="form.phone">
+                  <input type="text" id="phone" class="section-checkout__input" placeholder="(212) 692-93-92" v-model="form.phone">
                 </div>
               </div>
               <div class="col-12 mt-4">
@@ -146,7 +146,7 @@
                 <div class="section-checkout__form-group">
                   <label class="section-checkout__label">Credit Card Number</label>
                   <div class="section-checkout__payment section-checkout__payment--visa"></div>
-                  <input type="text" class="section-checkout__input" placeholder="0000 - 0000 - 0000 - 0000"
+                  <input type="text" id="card" class="section-checkout__input" placeholder="0000 - 0000 - 0000 - 0000"
                     v-model="form.card">
                 </div>
               </div>
@@ -154,25 +154,33 @@
                 <div class="section-checkout__form-group">
                   <label class="section-checkout__label">Security code</label>
                   <div class="section-checkout__q-icon">?</div>
-                  <input type="password" class="section-checkout__input" placeholder="***" v-model="form.security">
+                  <input type="password" id="security" class="section-checkout__input" placeholder="***" v-model="form.security">
                 </div>
               </div>
               <div class="col-6">
                 <div class="section-checkout__form-group">
                   <label class="section-checkout__label">Expiration date</label>
-                  <input type="text" class="section-checkout__input" placeholder="MM / YY"
+                  <input type="text" id="expirationDate" class="section-checkout__input" placeholder="MM / YY"
                     v-model="form.expirationDate">
                 </div>
               </div>
+              <div class="col-12 mt-3" v-if="errors.length">
+                <div class="section-checkout__errors">
+                  <strong>The following error(s) occurred:</strong>
+                  <ul>
+                    <li v-for="error in errors">{{ error }}</li>
+                  </ul>
+                </div>
+              </div>
               <div class="col-12 mb-5 mt-4">
-                <button class="section-checkout__button">
+                <button class="section-checkout__button" @click="validateForm">
                   <span class="material-icons form-section__cart mr-1">shopping_cart</span>
                   complete purchase
                 </button>
               </div>
             </div>
           </div>
-          <div class="col-4">
+          <div class="col-md-4 col-sm-6 col-9 mx-auto mb-5">
             <div class="order-cart">
               <div class="order-cart__border">
                 <h4 class="order-cart__top">

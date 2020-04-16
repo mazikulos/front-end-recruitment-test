@@ -19,16 +19,22 @@
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    color: white;
+    color: #fff;
     margin-right: 5px;
   }
   &__form-group {
-    @include shadowRadius($bgColor: white, $shadowColor: $gray, $color: white);
+    @include shadowRadius(#fff, $gray, #fff);
     position: relative;
     width: 100%;
     margin-bottom: 20px;
     &:hover {
-      @include shadowRadiusOver();
+      @include shadowRadiusAction();
+    }
+    &.error {
+      @include shadowRadiusAction($danger, $danger, $danger);
+      .section-checkout__label {
+        color: $danger;
+      }
     }
   }
   &__label {
@@ -110,8 +116,11 @@
     font-weight: 700;
     text-transform: uppercase;
     &:hover {
-      @include shadowRadiusOver($greenHover, $greenShadowHover, #fff);
+      @include shadowRadiusAction($greenHover, $greenShadowHover, #fff);
     }
+  }
+  &__errors {
+    color: $danger;
   }
 }
 .order-cart {
@@ -236,4 +245,11 @@
 
 .material-icons {
   font-size: 14px;
+}
+
+
+@media screen and (max-width: 992px) {
+  .section-checkout__no {
+    margin-left: 0;
+  }
 }

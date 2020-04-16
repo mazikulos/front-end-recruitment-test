@@ -109,7 +109,8 @@
             'United States',
             'Poland',
             'Italy'
-          ]
+          ],
+          errors: []
         }
       },
       filters: {
@@ -120,6 +121,113 @@
           return '$ ' + value.toFixed(2);
         },
       },
+      mounted() {
+        let inputs = document.querySelectorAll('.section-checkout__input');
+
+        inputs.forEach(el => {
+          el.addEventListener('input', function () {
+            if (el.parentElement.classList.contains('error')) {
+              el.parentElement.classList.remove('error')
+            }
+          })
+        });
+      },
+      methods: {
+        validateForm() {
+          this.errors = [];
+
+          if (!this.form.firstName) {
+            this.errors.push('First name can not be empty');
+            this.highlightField('firstName');
+          }
+
+          if (!this.form.lastName) {
+            this.errors.push('Last name can not be empty');
+            this.highlightField('lastName');
+          }
+
+          if (!this.form.email) {
+            this.errors.push('Email can not be empty');
+            this.highlightField('email');
+          } else if (!this.validateEmail(this.form.email)) {
+            this.errors.push('Valid email required');
+            this.highlightField('email');
+          }
+
+          if (!this.form.postalCode) {
+            this.errors.push('Postal code can not be empty');
+            this.highlightField('postalCode');
+          } else if (!this.validatePostal(this.form.postalCode)) {
+            this.errors.push('Valid postal code required');
+            this.highlightField('postalCode');
+          }
+
+          if (!this.form.phone) {
+            this.errors.push('Phone number can not be empty');
+            this.highlightField('phone');
+          } else if (!this.validatePhone(this.form.phone)) {
+            this.errors.push('Valid phone number required');
+            this.highlightField('phone');
+          }
+
+          if (!this.form.card) {
+            this.errors.push('Credit Card Number can not be empty');
+            this.highlightField('card');
+          } else if (!this.validateCard(this.form.card)) {
+            this.errors.push('Valid Credit Card Number required');
+            this.highlightField('card');
+          }
+
+          if (!this.form.security) {
+            this.errors.push('Security code can not be empty');
+            this.highlightField('security');
+          } else if (!this.validateSecurity(this.form.security)) {
+            this.errors.push('Valid security code required');
+            this.highlightField('security');
+          }
+
+          if (!this.form.expirationDate) {
+            this.errors.push('Expiration date can not be empty');
+            this.highlightField('expirationDate');
+          } else if (!this.validateExpirationDate(this.form.expirationDate)) {
+            this.errors.push('Valid expiration date required (Year range is 18-29)');
+            this.highlightField('expirationDate');
+          }
+
+          if (this.errors.length == 0) {
+            alert('Form has been sent')
+          }
+
+        },
+        highlightField(fieldId) {
+          let field = document.querySelector('#' + fieldId).parentElement;
+          field.classList.add('error')
+        },
+        validateEmail(email) {
+          var regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          return regex.test(email);
+        },
+        validatePostal(postal) {
+          var regex = /^[0-9]{5}(-[0-9]{4})?$/;
+          return regex.test(postal);
+        },
+        validatePhone(phone) {
+          let regex = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/;
+          return regex.test(phone);
+        },
+        validateCard(card) {
+          let regex = /^4[0-9]{12}(?:[0-9]{3})?$/;
+          return regex.test(card);
+        },
+        validateSecurity(security) {
+          let regex = /^[0-9]{3,4}$/;
+          return regex.test(security);
+        },
+        validateExpirationDate(expirationDate) {
+          let regex = /^((0[1-9])|(1[0-2]))[\/\.\-]*((1[8-9])|(2[0-9]))$/;
+          return regex.test(expirationDate);
+        }
+      }
     });
   }
 

@@ -18,7 +18,7 @@ $borderRadius: 3px;
   transition: 0.3s;
 }
 
-@mixin shadowRadiusOver($bgColor: white, $shadowColor: $darkGray, $color: white) {
+@mixin shadowRadiusAction($bgColor: white, $shadowColor: $darkGray, $color: white) {
   box-shadow: 0 2px 0 0 $shadowColor;
   background-color: $bgColor;
   color: $color;
